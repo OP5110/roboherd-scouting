@@ -11,13 +11,17 @@ import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // IMPORTANT for GitHub Pages project sites:
+  // repo name = "roboherd-scouting" -> base must be "/roboherd-scouting/"
+  base: "/roboherd-scouting/",
+
   css: {
     postcss: {
-      plugins: [autoprefixer, postcssPresetEnv({ stage: 1 })]
-    }
+      plugins: [autoprefixer, postcssPresetEnv({ stage: 1 })],
+    },
   },
   define: {
-    APP_VERSION: JSON.stringify(process.env.npm_package_version)
+    APP_VERSION: JSON.stringify(process.env.npm_package_version),
   },
   plugins: [
     ReactivityTransform(),
@@ -34,23 +38,21 @@ export default defineConfig({
           {
             src: "icons/pwa-192x192.png",
             sizes: "192x192",
-            type: "image/png"
+            type: "image/png",
           },
           {
             src: "icons/pwa-512x512.png",
             sizes: "512x512",
-            type: "image/png"
-          }
-        ]
-      }
+            type: "image/png",
+          },
+        ],
+      },
     }),
-    liveReload([
-      "public/"
-    ])
+    liveReload(["public/"]),
   ],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
-  }
+  },
 });
